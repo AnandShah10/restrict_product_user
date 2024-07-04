@@ -78,7 +78,7 @@ For further assistance or to report issues, please contact us:
 
 - **Email**: `shahanand1072004@gmail.com <mailto:shahanand1072004@gmail.com>`_
 
-You can also contribute to the module by submitting issues and pull requests on our `GitHub repository <https://github.com/ShahAnand10/restrict_product_user>`_.
+You can also contribute to the module by submitting issues and pull requests on our `GitHub repository <https://github.com/AnandShah10/restrict_product_user>`_.
 
 We appreciate your feedback and suggestions!
 
