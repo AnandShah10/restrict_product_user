@@ -1,29 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+
     <record id="rule_restrict_product" model="ir.rule">
         <field name="name">Restrict Products</field>
         <field name="model_id" ref="product.model_product_template"/>
-        <field name="domain_force">['&amp;','|',('categ_id','in',user.allowed_categories.ids),('categ_id','child_of',user.allowed_categories.ids),
-            '|', ('company_id', '=', False), ('company_id', '=', user.company_id.id)]</field>
+        <field name="domain_force">['&amp;','|',('categ_id','in',user.allowed_categories_ids.ids),('categ_id','child_of',user.allowed_categories_ids.ids),
+            '|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]
+        </field>
         <field name="groups" eval="[(4,ref('base.group_user'))]"/>
     </record>
+
     <record id="rule_restrict_product_admin" model="ir.rule">
-            <field name="name">admin full access to all products</field>
-            <field name="model_id" ref="product.model_product_template"/>
-            <field name="groups" eval="[(4,ref('base.group_erp_manager'))]"/>
-            <field name="domain_force">[(1, '=', 1)]</field>
-        </record>
+        <field name="name">Full Product Access:admin full access to all products</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="groups" eval="[(4,ref('base.group_erp_manager'))]"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]</field>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="perm_read" eval="1"/>
+    </record>
+
     <record id="rule_restrict_product_variant" model="ir.rule">
         <field name="name">Restrict Product variants</field>
         <field name="model_id" ref="product.model_product_product"/>
-        <field name="domain_force">['&amp;','|',('categ_id','in',user.allowed_categories.ids),('categ_id','child_of',user.allowed_categories.ids),
-            '|', ('company_id', '=', False), ('company_id', '=', user.company_id.id)]</field>
+        <field name="domain_force">['&amp;','|',('categ_id','in',user.allowed_categories_ids.ids),('categ_id','child_of',user.allowed_categories_ids.ids),
+            '|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]
+        </field>
         <field name="groups" eval="[(4,ref('base.group_user'))]"/>
     </record>
+
     <record id="rule_restrict_product_variant_admin" model="ir.rule">
-            <field name="name">admin full access to all product variants</field>
-            <field name="model_id" ref="product.model_product_product"/>
-            <field name="groups" eval="[(4,ref('base.group_erp_manager'))]"/>
-            <field name="domain_force">[(1, '=', 1)]</field>
-        </record>
+        <field name="name">Full Variant Access :admin full access to all product variants</field>
+        <field name="model_id" ref="product.model_product_product"/>
+        <field name="groups" eval="[(4,ref('base.group_erp_manager'))]"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]</field>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="perm_read" eval="1"/>
+    </record>
+
 </odoo>
